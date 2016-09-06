@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request, session, flash
+from flask import flask, render_template, redirect, url_for, request, session, flash
 #from ivr_phone_tree_python import app
 import twilio.twiml
 from view_helpers import twiml
