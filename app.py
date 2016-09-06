@@ -1,4 +1,3 @@
-import os
 from flask import Flask, render_template, redirect, url_for, request, session, flash
 #from ivr_phone_tree_python import app
 import twilio.twiml
