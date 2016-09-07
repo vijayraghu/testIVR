@@ -72,7 +72,7 @@ def _Credit_Card(response):
     response.hangup()
     return response    	
     
-def _Speak_Agent(response)
+def _Speak_Agent(response):
     with response.gather(numDigits=1, action=url_for('agent'), method="POST") as g:
         g.say("To call Vijay, press 2. To call Partha, press 3",
               voice="alice", language="en-GB", loop=3)
