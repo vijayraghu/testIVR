@@ -9,10 +9,10 @@ from twilio.rest import TwilioRestClient
 
 app = Flask(__name__)
 
-@app.route('/')
-@app.route('/ivr')
-def home():
-    return render_template('index.html')
+#@app.route('/')
+#@app.route('/ivr')
+#def home():
+    #return render_template('index.html')
 
 @app.route('/ivr/welcome', methods=['POST'])
 def welcome():
