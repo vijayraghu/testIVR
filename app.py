@@ -6,7 +6,7 @@ from flask import request
 from flask import render_template
 from twilio import twiml
 from twilio.rest import TwilioRestClient
-from view_helpers import twiml
+#from view_helpers import twiml
 
 app = Flask(__name__)
 
