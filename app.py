@@ -44,7 +44,7 @@ def agent():
     if option_actions.has_key(selected_option):
         response = twiml.Response()
         response.dial(option_actions[selected_option])
-        return twiml(response)
+        return Response(str(response), mimetype='text/xml')
 
     return _redirect_welcome()
 
