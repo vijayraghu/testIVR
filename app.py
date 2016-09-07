@@ -25,7 +25,7 @@ def welcome():
 def menu():
     selected_option = request.form['Digits']
     option_actions = {'1': _Savings,
-                      '2': _Credit_Card
+                      '2': _Credit_Card,
                       '3': _Speak_Agent}
 
     if option_actions.has_key(selected_option):
