@@ -1,15 +1,18 @@
-from flask import Flask, render_template, redirect, url_for, request, session, flash
-#from ivr_phone_tree_python import app
-import twilio.twiml
-from view_helpers import twiml
+import os
+
+from flask import Flask
+from flask import Response
+from flask import request
+from flask import render_template
+from twilio import twiml
+from twilio.rest import TwilioRestClient
 
 app = Flask(__name__)
 
 @app.route('/')
 @app.route('/ivr')
-#def home():
-    #return render_template('index.html')
-
+def home():
+    return render_template('index.html')
 
 @app.route('/ivr/welcome', methods=['POST'])
 def welcome():
@@ -63,5 +66,8 @@ def _redirect_welcome():
     response = twilio.twiml.Response()
     response.say("Returning to the main menu", voice="alice", language="en-GB")
     response.redirect(url_for('welcome'))
-
     return twiml(response)
+    
+if __name__ == '__main__':
+    # Note that in production, you would want to disable debugging
+    app.run(debug=False)
