@@ -70,5 +70,8 @@ def _redirect_welcome():
     return twiml(response)
     
 if __name__ == '__main__':
-    # Note that in production, you would want to disable debugging
-    app.run(debug=False)
+    port = int(os.getenv('PORT', 5000))
+
+    print "Starting app on port %d" % port
+
+    app.run(debug=False, port=port, host='0.0.0.0')
