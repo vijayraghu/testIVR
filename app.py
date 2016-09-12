@@ -38,7 +38,7 @@ def menu():
 @app.route('/ivr/agent', methods=['POST'])
 def agent():
     selected_option = request.form['Digits']
-    option_actions = {'2': "+919840610434",
+    option_actions = {'2': "+917338856833",
                       '3': "+919940623555"}
 
     if option_actions.has_key(selected_option):
