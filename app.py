@@ -16,8 +16,8 @@ app = Flask(__name__)
 def welcome():
     response = twiml.Response()
      twiml.say("Hello Krishna Raman " +
-              "This is a call from Infosys BGC team to inform you that you have defaulted to submit your work experience records	" +
-              "Please do the needful at the earliest failing which necessary action would be taken. Thank you", voice="alice", language="en-GB", loop=3)
+              "This is a call from Infosys BGC team to inform you that you have defaulted to submit your work experience records" +
+              "Please do the needful at the earliest failing which necessary action would be taken. Thank you", voice="alice", language="en-GB")
     return Response(str(response), mimetype='text/xml')
 	
 if __name__ == '__main__':
