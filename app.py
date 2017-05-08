@@ -44,8 +44,7 @@ def agent():
         response = twiml.Response()
         response.dial(option_actions[selected_option])
         return Response(str(response), mimetype='text/xml')
-
-    return _redirect_welcome()
+	return _redirect_welcome()
 
 try:
 	import apiai
