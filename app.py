@@ -20,7 +20,7 @@ except ImportError:
     )
     import apiai
 	
-CLIENT_ACCESS_TOKEN = 'your client access token"
+CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
 
 ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
 
