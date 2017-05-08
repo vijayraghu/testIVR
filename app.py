@@ -11,6 +11,7 @@ from twilio.rest import TwilioRestClient
 import os.path
 import sys
 import json
+import apiai
 
 app = Flask(__name__)
 
