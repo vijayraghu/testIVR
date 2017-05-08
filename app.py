@@ -41,9 +41,9 @@ def agent():
 	option_actions = {'2': "+917338856833",
                       '3': "+919940623555"}
 	if option_actions.has_key(selected_option):
-        response = twiml.Response()
-        response.dial(option_actions[selected_option])
-        return Response(str(response), mimetype='text/xml')
+		response = twiml.Response()
+		response.dial(option_actions[selected_option])
+		return Response(str(response), mimetype='text/xml')
 	return _redirect_welcome()
 
 try:
