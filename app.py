@@ -12,19 +12,6 @@ import os.path
 import sys
 import json
 
-try:
-    import apiai
-except ImportError:
-    sys.path.append(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir)
-    )
-    import apiai
-	
-	
-CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
-
-ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
-
 app = Flask(__name__)
 
 @app.route('/ivr/welcome', methods=['POST'])
@@ -63,6 +50,17 @@ def agent():
 
     return _redirect_welcome()
 
+try:
+	import apiai
+	except ImportError:
+		sys.path.append(
+			os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir)
+		)
+	import apiai
+		
+CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
+
+ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
 
 # private methods
 
