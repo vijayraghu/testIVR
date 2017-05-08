@@ -20,8 +20,9 @@ except ImportError:
     )
     import apiai
 	
-CLIENT_ACCESS_TOKEN = 'your client access token'
-	ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
+CLIENT_ACCESS_TOKEN = 'your client access token"
+
+ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
 
 app = Flask(__name__)
 
