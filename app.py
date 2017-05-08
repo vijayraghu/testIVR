@@ -66,7 +66,6 @@ def agent():
 # private methods
 
 def _Account_Balance(response):
-	
 	request = ai.text_request()
 	request.lang = 'en'
 	request.session_id = "1232323456"
@@ -75,13 +74,9 @@ def _Account_Balance(response):
 	answerstr = answer.read().decode('utf-8')
 	answer_obj = json.loads(answerstr)
 	prompt = answer_obj["result"]["fulfillment"]["speech"]
-	
-    response.say("prompt",
-                 voice="alice", language="en-GB")
-
+	response.say("prompt", voice="alice", language="en-GB")
     response.say("Thank you for calling ABC Bank -  " +
                  " The bank of the future")
-
     response.hangup()
     return response
 
