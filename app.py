@@ -18,8 +18,7 @@ app = Flask(__name__)
 def welcome():
 	response = twiml.Response()
 	with response.gather(numDigits=1, action=url_for('menu'), method="POST") as g:
-        g.say("Thank you for calling ABC Bank " +
-              "Press 1, for Account Balance. For Credit Card services, press 2. To speak to an agent, press 3 " +
+		g.say("Thank you for calling ABC Bank " + "Press 1, for Account Balance. For Credit Card services, press 2. To speak to an agent, press 3 " +
               "To hear these options again, stay on the line", voice="alice", language="en-GB", loop=3)
 	return Response(str(response), mimetype='text/xml')
 
