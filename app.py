@@ -76,10 +76,10 @@ def _Account_Balance(response):
 	answer_obj = json.loads(answerstr)
 	prompt = answer_obj["result"]["fulfillment"]["speech"]
 	response.say("prompt", voice="alice", language="en-GB")
-    response.say("Thank you for calling ABC Bank -  " +
+	response.say("Thank you for calling ABC Bank -  " +
                  " The bank of the future")
-    response.hangup()
-    return response
+	response.hangup()
+	return response
 
 
 def _Credit_Card(response):
