@@ -61,11 +61,12 @@ def _Account_Balance(response):
 	CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
 	print (CLIENT_ACCESS_TOKEN)
 	ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
-	req = ai.text_request()
-	req.lang = 'en'
-	req.session_id = "1232323456"
-	req.query = "I want my account balance"
-	answer = req.getresponse()
+	print (ai)
+	request = ai.text_request()
+	request.lang = 'en'
+	#req.session_id = "1232323456"
+	request.query = "I want my account balance"
+	answer = request.getresponse()
 	print (answer)
 	answerstr = answer.read().decode('utf-8')
 	answer_obj = json.loads(answerstr)
