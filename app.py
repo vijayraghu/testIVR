@@ -58,7 +58,7 @@ def agent():
 # private methods
 
 def _Account_Balance(response):
-	CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
+	CLIENT_ACCESS_TOKEN = '5f910e9e98e54ccb924f606705984a43'
 	print (CLIENT_ACCESS_TOKEN)
 	ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
 	print (ai)
