@@ -47,12 +47,11 @@ def agent():
 		return Response(str(response), mimetype='text/xml')
 	return _redirect_welcome()
 
-CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
-ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
-
 # private methods
 
 def _Account_Balance(response):
+	CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
+	ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
 	request = ai.text_request()
 	request.lang = 'en'
 	request.session_id = "1232323456"
