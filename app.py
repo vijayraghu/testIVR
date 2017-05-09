@@ -51,6 +51,7 @@ def agent():
 
 def _Account_Balance(response):
 	CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
+	print (CLIENT_ACCESS_TOKEN)
 	ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
 	request = ai.text_request()
 	request.lang = 'en'
@@ -60,6 +61,7 @@ def _Account_Balance(response):
 	answerstr = answer.read().decode('utf-8')
 	answer_obj = json.loads(answerstr)
 	prompt = answer_obj["result"]["fulfillment"]["speech"]
+	print (prompt)
 	response.say("prompt", voice="alice", language="en-GB")
 	response.say("Thank you for calling ABC Bank -  " +
                  " The bank of the future")
