@@ -11,9 +11,17 @@ from twilio.rest import TwilioRestClient
 import os.path
 import sys
 import json
-import apiai
+#import apiai
 
-app = Flask(__name__)
+try:
+	import apiai
+except ImportError:
+	sys.path.append(
+		os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir)
+	)
+	import apiai
+	
+	app = Flask(__name__)
 
 @app.route('/ivr/welcome', methods=['POST'])
 def welcome():
