@@ -58,10 +58,10 @@ def _Account_Balance(response):
 	request.session_id = "1232323456"
 	request.query = "I want my account balance"
 	answer = request.getresponse()
+	print (answer)
 	answerstr = answer.read().decode('utf-8')
 	answer_obj = json.loads(answerstr)
 	prompt = answer_obj["result"]["fulfillment"]["speech"]
-	print (prompt)
 	response.say("prompt", voice="alice", language="en-GB")
 	response.say("Thank you for calling ABC Bank -  " +
                  " The bank of the future")
