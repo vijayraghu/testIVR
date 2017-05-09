@@ -61,16 +61,15 @@ def _Account_Balance(response):
 	CLIENT_ACCESS_TOKEN = '5f910e9e98e54ccb924f606705984a43'
 	print (CLIENT_ACCESS_TOKEN)
 	ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
-	print (ai)
 	request = ai.text_request()
 	request.lang = 'en'
 	#req.session_id = "1232323456"
 	request.query = "I want my account balance"
 	answer = request.getresponse()
-	print (answer)
 	answerstr = answer.read().decode('utf-8')
 	answer_obj = json.loads(answerstr)
 	prompt = answer_obj["result"]["fulfillment"]["speech"]
+	print (prompt)
 	response.say("prompt", voice="alice", language="en-GB")
 	response.say("Thank you for calling ABC Bank -  " +
                  " The bank of the future")
