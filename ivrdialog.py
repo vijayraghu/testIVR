@@ -47,8 +47,8 @@ def menu():
 @app.route('/ivr/agent', methods=['POST'])
 def agent():
 	selected_option = request.form['Digits']
-	option_actions = {'2': "+917338856833",
-                      '3': "+919940623555"}
+	option_actions = {'2': "number1",
+                      '3': "number2"}
 	if option_actions.has_key(selected_option):
 		response = twiml.Response()
 		response.dial(option_actions[selected_option])
@@ -58,7 +58,7 @@ def agent():
 # private methods
 
 def _Account_Balance(response):
-	CLIENT_ACCESS_TOKEN = '5f910e9e98e54ccb924f606705984a43'
+	CLIENT_ACCESS_TOKEN = 'apiaiclientaccesstoken'
 	print (CLIENT_ACCESS_TOKEN)
 	ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
 	request = ai.text_request()
