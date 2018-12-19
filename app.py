@@ -40,7 +40,7 @@ def _redirect_welcome():
     return Response(str(response), mimetype='text/xml')
 
 # Agent transfer--- Not in this app for now
-@app.route('/ivr/menu', methods=['POST'])
+@app.route('/menu', methods=['POST'])
 def menu():
     selected_option = request.form['Digits']
     option_actions = {'1': _Savings,
