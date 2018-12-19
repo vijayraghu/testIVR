@@ -10,15 +10,28 @@ app = Flask(__name__)
 def welcome():
     response = VoiceResponse()
     #response = twiml.Response()
-    with response.gather(numDigits=1, action=url_for('menu'), method="POST") as g:
+    with response.gather(num_digits=1, action=url_for('menu'), method="POST") as g:
         g.say("Thank you for calling ABC Bank." +
               "Press 1, for Banking services. For Credit Card services, press 2." +
               "To hear these options again, stay on the line.", voice="alice", language="en-US", loop=3)
-    return Response(str(response), mimetype='text/xml')
+    return twiml(response)
+
+# Call functions
+@app.route('/ivr/menu', methods=['POST'])
+def menu():
+    selected_option = request.form['Digits']
+    option_actions = {'1': _Savings,
+                      '2': _Credit_Card}
+    if option_actions.has_key(selected_option):
+        response = VoiceResponse()
+        option_actions[selected_option](response)
+        return twiml(response)
+    
+    return _redirect_welcome()
  
 # Helper Function for Banking Services
 def _Savings(response):
-    response = VoiceResponse()
+    #response = VoiceResponse()
     response.say("This is a test IVR service for Banking Services. Shortly you can do a whole lot more.",
                  voice="alice", language="en-US")
     response.hangup()
@@ -26,7 +39,7 @@ def _Savings(response):
 
 # Helper Function for Credit Card Services
 def _Credit_Card(response):
-    response = VoiceResponse()
+    #response = VoiceResponse()
     response.say(" This is a test IVR service for Credit Card Services. Shortly you can do a whole lot more.",
                  voice="alice", language="en-US")
     response.hangup()
@@ -38,19 +51,6 @@ def _redirect_welcome():
     response.say("Returning to the main menu", voice="alice", language="en-US")
     response.redirect(url_for('welcome'))
     return Response(str(response), mimetype='text/xml')
-
-# Agent transfer--- Not in this app for now
-@app.route('/menu', methods=['POST'])
-def menu():
-    selected_option = request.form['Digits']
-    option_actions = {'1': _Savings,
-                      '2': _Credit_Card}
-    if option_actions.has_key(selected_option):
-        response = VoiceResponse()
-        #response = twiml.Response()
-        option_actions[selected_option](response)
-        return Response(str(response), mimetype='text/xml')
-    return _redirect_welcome()
 
 # Helper Function for Agent transfer
 def _Speak_Agent(response):
