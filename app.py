@@ -11,15 +11,15 @@ def welcome():
     response = VoiceResponse()
     #response = twiml.Response()
     with response.gather(numDigits=1, action=url_for('menu'), method="POST") as g:
-        g.say("Thank you for calling ABC Bank " +
-              "Press 1, for Banking services. For Credit Card services, press 2. To speak to an agent, press 3 " +
-              "To hear these options again, stay on the line", voice="alice", language="en-US", loop=3)
+        g.say("Thank you for calling ABC Bank." +
+              "Press 1, for Banking services. For Credit Card services, press 2." +
+              "To hear these options again, stay on the line.", voice="alice", language="en-US", loop=3)
     return Response(str(response), mimetype='text/xml')
  
 # Helper Function for Banking Services
 def _Savings(response):
     response = VoiceResponse()
-    response.say(" This is a test IVR service for Banking Services. Shortly you can do a whole lot more",
+    response.say("This is a test IVR service for Banking Services. Shortly you can do a whole lot more.",
                  voice="alice", language="en-US")
     response.hangup()
     return response
@@ -27,7 +27,7 @@ def _Savings(response):
 # Helper Function for Credit Card Services
 def _Credit_Card(response):
     response = VoiceResponse()
-    response.say(" This is a test IVR service for Credit Card Services. Shortly you can do a whole lot more",
+    response.say(" This is a test IVR service for Credit Card Services. Shortly you can do a whole lot more.",
                  voice="alice", language="en-US")
     response.hangup()
     return response
