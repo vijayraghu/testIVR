@@ -14,7 +14,7 @@ def welcome():
         g.say("Thank you for calling ABC Bank." +
               "Press 1, for Banking services. For Credit Card services, press 2." +
               "To hear these options again, stay on the line.", voice="alice", language="en-US", loop=3)
-    return twiml(response)
+    return str(response)
 
 # Call functions
 @app.route('/ivr/menu', methods=['POST'])
@@ -25,7 +25,7 @@ def menu():
     if option_actions.has_key(selected_option):
         response = VoiceResponse()
         option_actions[selected_option](response)
-        return twiml(response)
+        return str(response)
     
     return _redirect_welcome()
  
@@ -35,7 +35,7 @@ def _Savings(response):
     response.say("This is a test IVR service for Banking Services. Shortly you can do a whole lot more.",
                  voice="alice", language="en-US")
     response.hangup()
-    return response
+    return str(response)
 
 # Helper Function for Credit Card Services
 def _Credit_Card(response):
@@ -43,7 +43,7 @@ def _Credit_Card(response):
     response.say(" This is a test IVR service for Credit Card Services. Shortly you can do a whole lot more.",
                  voice="alice", language="en-US")
     response.hangup()
-    return response
+    return str(response)
 
 #Helper function for redirecting to Welcome Menu
 def _redirect_welcome():
