@@ -13,8 +13,7 @@ def welcome():
     #response = twiml.Response()
     with response.gather(num_digits=1, action=url_for('menu'), method="POST") as g:
         g.say("Thank you for calling ABC Bank." +
-              "Press 1, for Banking services. For Credit Card services, press 2." +
-              "To hear these options again, stay on the line.", voice="alice", language="en-US", loop=3)
+              "Press 1, for Banking services. For Credit Card services, press 2.", voice="alice", language="en-US")
     return str(response)
 
 # Call functions
