@@ -11,7 +11,6 @@ app = Flask(__name__)
 def welcome():
     response = VoiceResponse()
     #response = twiml.Response()
-    response.play(digits='123')
     with response.gather(num_digits=1, timeout=6, action=url_for('menu'), method="POST") as g:
         g.say("Thank you for calling ABC Bank." +
               "Press 1, for Banking services. For Credit Card services, press 2.", voice="alice", language="en-US")
