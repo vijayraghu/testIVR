@@ -11,7 +11,7 @@ app = Flask(__name__)
 def welcome():
     response = VoiceResponse()
     with response.gather(num_digits=1, timeout=25, action=url_for('menu'), method="POST") as g:
-        g.pause(length=2)
+        g.pause(length=4)
         g.say("Thank you for calling ABC Bank." +
               "Press 1, for Banking services. For Credit Card services, press 2.", voice="alice", language="en-US")
     return str(response)
