@@ -7,6 +7,7 @@ from signalwire.voice_response import VoiceResponse
 
 app = Flask(__name__)
 
+# Main Menu
 @app.route('/ivr/welcome', methods=['POST'])
 def welcome():
     response = VoiceResponse()
@@ -16,48 +17,93 @@ def welcome():
               "Press 1, for Banking services. For Credit Card services, press 2.", voice="alice", language="en-US")
     return str(response)
 
-# Call functions
+# Sub Menu 1
 @app.route('/ivr/menu', methods=['POST'])
 def menu():
     selected_option = request.form['Digits']
-    option_actions = {'1': _Savings,
-                      '2': _Credit_Card}
+    if selected_option == 1:
+        response = VoiceResponse()
+        with response.gather(num_digits=1, timeout=25, action=url_for('menubank'), method="POST") as g:
+        g.pause(length=4)
+        g.say("Press 1 for Account Balance. For any other information press 2.", voice="alice", language="en-US")
+        return str(response)
+    if selected_option == 2:
+        response = VoiceResponse()
+        with response.gather(num_digits=1, timeout=25, action=url_for('menucard'), method="POST") as g:
+        g.pause(length=4)
+        g.say("Press 1 for Due amount. For any other information press 2.", voice="alice", language="en-US")
+        return str(response)
+    return _redirect_welcome()
+
+# Sub Menu 2-banking
+@app.route('/ivr/menu/menubank', methods=['POST'])
+def menubank():
+    selected_option = request.form['Digits']
+    option_actions = {'1': _AccountBalance,
+                      '2': _OtherBank}
     if option_actions.has_key(selected_option):
         response = VoiceResponse()
         option_actions[selected_option](response)
         return str(response)
-    
-    return _redirect_welcome()
+    return _redirect_menu()
+
+# Sub Menu 2-credit card
+@app.route('/ivr/menu/menucredit', methods=['POST'])
+def menucredit():
+    selected_option = request.form['Digits']
+    option_actions = {'1': _DueAmount,
+                      '2': _OtherCredit}
+    if option_actions.has_key(selected_option):
+        response = VoiceResponse()
+        option_actions[selected_option](response)
+        return str(response)
+    return _redirect_menu()
  
-# Helper Function for Banking Services
-def _Savings(response):
+# Helper Function for Banking Services-Account Balance
+def _AccountBalance(response):
     #response = VoiceResponse()
-    response.say("This is a test IVR service for Banking Services. Shortly you can do a whole lot more.",
+    response.say("We are currently testing our services. You can hear your account balance once we have launched the service.",
                  voice="alice", language="en-US")
     response.hangup()
     return str(response)
 
-# Helper Function for Credit Card Services
-def _Credit_Card(response):
+# Helper Function for Banking Services-Others
+def _OtherBank(response):
     #response = VoiceResponse()
-    response.say(" This is a test IVR service for Credit Card Services. Shortly you can do a whole lot more.",
+    response.say("We are in the process of setting up our banking services. Shortly you can do a whole lot more.",
                  voice="alice", language="en-US")
     response.hangup()
     return str(response)
 
-#Helper function for redirecting to Welcome Menu
+# Helper Function for Banking Services-Account Balance
+def _DueAmount(response):
+    #response = VoiceResponse()
+    response.say("We are currently testing our services. You can hear your payment due amount once we have launched the service.",
+                 voice="alice", language="en-US")
+    response.hangup()
+    return str(response)
+
+# Helper Function for Credit card Services-Others
+def _OtherCredit(response):
+    #response = VoiceResponse()
+    response.say("We are in the process of setting up our credit card services. Shortly you can do a whole lot more.",
+                 voice="alice", language="en-US")
+    response.hangup()
+    return str(response)
+
+#Helper function for redirecting to Main Menu
 def _redirect_welcome():
     response = VoiceResponse()
     response.say("Returning to the main menu", voice="alice", language="en-US")
     response.redirect(url_for('welcome'))
     return Response(str(response), mimetype='text/xml')
 
-# Helper Function for Agent transfer
-def _Speak_Agent(response):
-    with response.gather(numDigits=1, action=url_for('agent'), method="POST") as g:
-        g.say("To call Vijay, press 2. To call Partha, press 3",
-              voice="alice", language="en-GB", loop=3)
-    return response
+#Helper function for redirecting to Sub Menu 1
+def _redirect_menu():
+    response = VoiceResponse()
+    response.say("Returning to the previous menu", voice="alice", language="en-US")
+    response.redirect(url_for('menu'))
+    return Response(str(response), mimetype='text/xml')
     
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
