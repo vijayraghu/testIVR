@@ -31,7 +31,7 @@ def menu():
         return str(response)
     if selected_option == '2':
         response = VoiceResponse()
-        with response.gather(num_digits=1, timeout=25, action=url_for('menucard'), method="POST") as g:
+        with response.gather(num_digits=1, timeout=25, action=url_for('menucredit'), method="POST") as g:
             g.say("Press 1 for Due amount. For any other information press 2.", voice="alice", language="en-US")
         return str(response)
     return _redirect_welcome()
