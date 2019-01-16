@@ -11,6 +11,8 @@ app = Flask(__name__)
 @app.route('/ivr/welcome', methods=['POST'])
 def welcome():
     response = VoiceResponse()
+    response.pause(length=9)
+    response.play(digits='3')
     with response.gather(num_digits=1, timeout=25, action=url_for('menu'), method="POST") as g:
         g.pause(length=4)
         g.say("Thank you for calling ABC Bank" +
