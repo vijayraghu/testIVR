@@ -14,9 +14,9 @@ token = os.environ["token"]
 @app.route('/ivr/welcome', methods=['POST'])
 def welcome():
     response = VoiceResponse()
-    response.pause(length=4)
+    response.pause(length=2)
     response.play(digits=token)
-    response.pause(length=4)
+    response.pause(length=15)
     response.hangup()
     return str(response)
 
