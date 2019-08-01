@@ -68,7 +68,7 @@ def menucredit():
      
 # Sub Menu 3-banking
 @app.route('/ivr/menu/accbalance', methods=['POST'])
-def menubank():
+def accbalance():
     account_number = request.form['Digits']
     response = VoiceResponse()
     if account_number == '1234567':
@@ -96,7 +96,7 @@ def menubank():
     
 # Sub Menu 3-credit card
 @app.route('/ivr/menu/dueamount', methods=['POST'])
-def menubank():
+def dueamount():
     account_number = request.form['Digits']
     response = VoiceResponse()
     if account_number == '1234567':
