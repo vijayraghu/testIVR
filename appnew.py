@@ -41,7 +41,7 @@ def menubank():
     print("Selected option is => " + selected_option)
     if selected_option =='1':
         response = VoiceResponse()
-         with response.gather(num_digits=7, timeout=25, action=url_for('accbalance'), method="POST") as g:
+        with response.gather(num_digits=7, timeout=25, action=url_for('accbalance'), method="POST") as g:
             g.say("Please provide your account number", voice="alice", language="en-US")
         return str(response)
      if selected_option == '2':
@@ -59,7 +59,7 @@ def menucredit():
     print("Selected option is => " + selected_option)
     if selected_option =='1':
         response = VoiceResponse()
-         with response.gather(num_digits=7, timeout=25, action=url_for('dueamount'), method="POST") as g:
+        with response.gather(num_digits=7, timeout=25, action=url_for('dueamount'), method="POST") as g:
             g.say("Please provide your account number", voice="alice", language="en-US")
         return str(response)
      if selected_option == '2':
