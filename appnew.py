@@ -46,9 +46,10 @@ def menubank():
         return str(response)
      if selected_option == '2':
         response = VoiceResponse()
-        with response.gather(num_digits=1, timeout=25, action=url_for('menucredit'), method="POST") as g:
-            g.say("We are in the process of setting up other banking services. Shortly you can do a whole lot more", voice="alice", language="en-US")
-            response.hangup()
+        response.say("We are in the process of setting up other banking services. Shortly you can do a whole lot more", voice="alice", language="en-US")
+        #with response.gather(num_digits=1, timeout=25, action=url_for('menucredit'), method="POST") as g:
+            #g.say("We are in the process of setting up other banking services. Shortly you can do a whole lot more", voice="alice", language="en-US")
+        response.hangup()
         return str(response)
     
 #Sub Menu 2-credit card
@@ -63,12 +64,13 @@ def menucredit():
         return str(response)
      if selected_option == '2':
         response = VoiceResponse()
-        with response.gather(num_digits=1, timeout=25, action=url_for('menucredit'), method="POST") as g:
-            g.say("We are in the process of setting up other credit card services. Shortly you can do a whole lot more", voice="alice", language="en-US")
-            response.hangup()
+        response.say("We are in the process of setting up other credit card services. Shortly you can do a whole lot more", voice="alice", language="en-US")
+        #with response.gather(num_digits=1, timeout=25, action=url_for('menucredit'), method="POST") as g:
+            #g.say("We are in the process of setting up other credit card services. Shortly you can do a whole lot more", voice="alice", language="en-US")
+        response.hangup()
         return str(response)
      
-# Sub Menu 2-banking
+# Sub Menu 3-banking
 @app.route('/ivr/menu/accbalance', methods=['POST'])
 def menubank():
     account_number = request.form['Digits']
@@ -84,10 +86,9 @@ def menubank():
     else:
         response.say("I am sorry, you have provided an incorrect account number. Goodbye", voice="alice", language="en-US")
         response.hangup()
-        return _redirect_menu()
-    
-    
-    
+        return str(response)
+        
+    '''
     option_actions = {'1': _AccountBalance,
                       '2': _OtherBank}
     if option_actions.has_key(selected_option):
@@ -95,7 +96,26 @@ def menubank():
         option_actions[selected_option](response)
         return str(response)
     return _redirect_menu()
-
+    '''
+    
+# Sub Menu 3-credit card
+@app.route('/ivr/menu/dueamount', methods=['POST'])
+def menubank():
+    account_number = request.form['Digits']
+    response = VoiceResponse()
+    if account_number == '1234567':
+        response.say("Your total due amount is five hundred dollars", voice="alice", language="en-US")
+        response.hangup()
+        return str(response)
+    elif account_number == '7654321':
+        response.say("Your total due amount is eight hundred dollars", voice="alice", language="en-US")
+        response.hangup()
+        return str(response)
+    else:
+        response.say("I am sorry, you have provided an incorrect account number. Goodbye", voice="alice", language="en-US")
+        response.hangup()
+        return str(response)
+'''
 # Sub Menu 2-credit card
 @app.route('/ivr/menu/menucredit', methods=['POST'])
 def menucredit():
@@ -107,7 +127,7 @@ def menucredit():
         option_actions[selected_option](response)
         return str(response)
     return _redirect_menu()
- 
+
 # Helper Function for Banking Services-Account Balance
 def _AccountBalance(response):
     #response = VoiceResponse()
@@ -153,7 +173,7 @@ def _redirect_menu():
     response.say("Returning to the previous menu", voice="alice", language="en-US")
     response.redirect(url_for('menu'))
     return Response(str(response), mimetype='text/xml')
-    
+'''
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     print "Starting app on port %d" % port
