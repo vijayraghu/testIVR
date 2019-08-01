@@ -60,7 +60,7 @@ def menucredit():
         with response.gather(num_digits=7, timeout=25, action=url_for('dueamount'), method="POST") as g:
             g.say("Please provide your account number", voice="alice", language="en-US")
         return str(response)
-     if selected_option == '2':
+    if selected_option == '2':
         response = VoiceResponse()
         response.say("We are in the process of setting up other credit card services. Shortly you can do a whole lot more", voice="alice", language="en-US")
         response.hangup()
