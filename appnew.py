@@ -76,7 +76,7 @@ def accbalance():
         response.hangup()
         return str(response)
     elif account_number == '7654321':
-        response.say("Your savings account balance is ten thousand dollars", voice="alice", language="en-US")
+        response.say("Your savings account balance is five thousand dollars", voice="alice", language="en-US")
         response.hangup()
         return str(response)
     else:
