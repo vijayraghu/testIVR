@@ -34,10 +34,60 @@ def menu():
         return str(response)
     return _redirect_welcome()
 
-# Sub Menu 2-banking
+#Sub Menu 2-banking
 @app.route('/ivr/menu/menubank', methods=['POST'])
 def menubank():
     selected_option = request.form['Digits']
+    print("Selected option is => " + selected_option)
+    if selected_option =='1':
+        response = VoiceResponse()
+         with response.gather(num_digits=7, timeout=25, action=url_for('accbalance'), method="POST") as g:
+            g.say("Please provide your account number", voice="alice", language="en-US")
+        return str(response)
+     if selected_option == '2':
+        response = VoiceResponse()
+        with response.gather(num_digits=1, timeout=25, action=url_for('menucredit'), method="POST") as g:
+            g.say("We are in the process of setting up other banking services. Shortly you can do a whole lot more", voice="alice", language="en-US")
+            response.hangup()
+        return str(response)
+    
+#Sub Menu 2-credit card
+@app.route('/ivr/menu/menucredit', methods=['POST'])
+def menucredit():
+    selected_option = request.form['Digits']
+    print("Selected option is => " + selected_option)
+    if selected_option =='1':
+        response = VoiceResponse()
+         with response.gather(num_digits=7, timeout=25, action=url_for('dueamount'), method="POST") as g:
+            g.say("Please provide your account number", voice="alice", language="en-US")
+        return str(response)
+     if selected_option == '2':
+        response = VoiceResponse()
+        with response.gather(num_digits=1, timeout=25, action=url_for('menucredit'), method="POST") as g:
+            g.say("We are in the process of setting up other credit card services. Shortly you can do a whole lot more", voice="alice", language="en-US")
+            response.hangup()
+        return str(response)
+     
+# Sub Menu 2-banking
+@app.route('/ivr/menu/accbalance', methods=['POST'])
+def menubank():
+    account_number = request.form['Digits']
+    response = VoiceResponse()
+    if account_number == '1234567':
+        response.say("Your savings account balance is ten thousand dollars", voice="alice", language="en-US")
+        response.hangup()
+        return str(response)
+    elif account_number == '7654321':
+        response.say("Your savings account balance is ten thousand dollars", voice="alice", language="en-US")
+        response.hangup()
+        return str(response)
+    else:
+        response.say("I am sorry, you have provided an incorrect account number. Goodbye", voice="alice", language="en-US")
+        response.hangup()
+        return _redirect_menu()
+    
+    
+    
     option_actions = {'1': _AccountBalance,
                       '2': _OtherBank}
     if option_actions.has_key(selected_option):
